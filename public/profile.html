@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Slot Machine</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Bienvenue, <span id="usernameDisplay"></span></h1>
+        <p>Solde actuel: <span id="balanceDisplay"></span> €</p>
+        <a href="index.html">Retour à l'accueil</a>
+    </div>
+
+    <script>
+        // Récupérer les données de l'utilisateur connecté (utiliser la session backend pour cela)
+        async function fetchUserData() {
+            const response = await fetch('http://localhost:3000/profile', {
+                method: 'GET',
+                credentials: 'same-origin',
+            });
+
+            const data = await response.json();
+
+            if (data.error) {
+                window.location.href = 'login.html'; // Rediriger si pas connecté
+            } else {
+                document.getElementById('usernameDisplay').textContent = data.username;
+                document.getElementById('balanceDisplay').textContent = data.balance;
+            }
+        }
+
+        fetchUserData();
+    </script>
+
+</body>
+
+</html>
