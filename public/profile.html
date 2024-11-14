@@ -4,39 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil - Slot Machine</title>
+    <title>Profil - Jackpot Tob Slot</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <div class="profile-container">
+        <h1>Mon Profil</h1>
 
-    <div class="container">
-        <h1>Bienvenue, <span id="usernameDisplay"></span></h1>
-        <p>Solde actuel: <span id="balanceDisplay"></span> €</p>
-        <a href="index.html">Retour à l'accueil</a>
+        <div class="profile-info">
+            <p><strong>Nom d'utilisateur :</strong> <span id="username"></span></p>
+            <p><strong>Solde :</strong> <span id="balance"></span> €</p>
+        </div>
+
+        <div class="profile-actions">
+            <button onclick="window.location.href='/game'">Retour au jeu</button>
+            <button onclick="window.location.href='/logout'">Déconnexion</button>
+        </div>
     </div>
 
     <script>
-        // Récupérer les données de l'utilisateur connecté (utiliser la session backend pour cela)
-        async function fetchUserData() {
-            const response = await fetch('http://localhost:3000/profile', {
-                method: 'GET',
-                credentials: 'same-origin',
+        // Charger les informations de l'utilisateur via l'API backend
+        fetch('/profile')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('username').textContent = data.username;
+                document.getElementById('balance').textContent = data.balance;
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement du profil:', error);
             });
-
-            const data = await response.json();
-
-            if (data.error) {
-                window.location.href = 'login.html'; // Rediriger si pas connecté
-            } else {
-                document.getElementById('usernameDisplay').textContent = data.username;
-                document.getElementById('balanceDisplay').textContent = data.balance;
-            }
-        }
-
-        fetchUserData();
     </script>
-
 </body>
 
 </html>
