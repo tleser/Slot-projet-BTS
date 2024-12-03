@@ -61,7 +61,7 @@ app.post('/register', (req, res) => {
 
 // Route pour la page de connexion
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Route pour traiter les données de connexion
@@ -136,30 +136,53 @@ app.post('/api/scores', (req, res) => {
     });
 });
 
-// Route pour afficher le profil de l'utilisateur
+// Route pour afficher la page de profil de l'utilisateur
 app.get('/profile', (req, res) => {
     if (!req.session.user) {
-        return res.redirect('/login');  // Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
+        return res.redirect('/login');
     }
 
-    const userId = req.session.user.id;
-    db.get('SELECT * FROM users WHERE id = ?', [userId], (err, user) => {
-        if (err || !user) {
-            return res.status(500).send('Erreur lors de la récupération du profil');
-        }
-
-        // Rendre une page de profil avec les informations de l'utilisateur
-        res.json({
-            username: user.username,
-            balance: user.balance
-        });
-    });
+    // Envoyer le fichier HTML de profil
+    res.sendFile(path.join(__dirname, 'public', 'profile.html'));
 });
 
 // Route pour déconnecter l'utilisateur
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
         res.redirect('/');
+    });
+});
+
+// Route pour récupérer le solde actuel de l'utilisateur
+app.get('/api/user/balance', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ error: 'Utilisateur non connecté' });
+    }
+
+    const userId = req.session.user.id;
+    db.get('SELECT balance FROM users WHERE id = ?', [userId], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erreur lors de la récupération du solde' });
+        }
+        res.json({ balance: row.balance });
+    });
+});
+
+// Route pour mettre à jour le solde après chaque tour de jeu
+app.post('/api/user/update-balance', (req, res) => {
+    if (!req.session.user) {
+        return res.status(401).json({ error: 'Utilisateur non connecté' });
+    }
+
+    const userId = req.session.user.id;
+    const newBalance = req.body.balance;
+
+    db.run('UPDATE users SET balance = ? WHERE id = ?', [newBalance, userId], (err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erreur lors de la mise à jour du solde' });
+        }
+        res.json({ balance: newBalance });
     });
 });
 

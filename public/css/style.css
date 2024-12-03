@@ -1,101 +1,99 @@
-/* General body styling */
+/* auth-style.css */
+
+/* Corps de la page */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f7fc;
-    margin: 0;
-    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #3B1E54, #9B7EBD);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
-/* Main container */
-.container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px;
+/* Conteneur du formulaire */
+.auth-container {
+    background: #EEEEEE;
+    /* Fond gris clair */
+    padding: 50px;
+    border-radius: 20px;
     text-align: center;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    max-width: 100%;
 }
 
-/* Title for the page */
+/* Titre */
 h1 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 3.5em;
+    font-weight: bold;
+    color: #3B1E54;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #3B1E54, #9B7EBD);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Input fields */
+/* Formulaire d'authentification */
 input[type="text"],
 input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+    padding: 15px;
+    font-size: 1.2em;
+    width: 80%;
+    margin: 15px 0;
+    border: 2px solid #3B1E54;
+    border-radius: 10px;
+    outline: none;
+    background-color: #FFF;
+    color: #333;
+    text-align: center;
+    transition: border-color 0.3s ease;
 }
 
-/* Button styles */
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #9B7EBD;
+}
+
+/* Bouton */
 button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+    padding: 15px 30px;
+    margin-top: 20px;
+    background: linear-gradient(135deg, #9B7EBD, #3B1E54);
+    color: #FFF;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 1.3em;
     cursor: pointer;
-    font-size: 16px;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #45a049;
+    background: linear-gradient(135deg, #3B1E54, #D4BEE4);
+    transform: translateY(-3px);
 }
 
-/* Links */
-a {
-    color: #4CAF50;
+/* Lien d'inscription */
+.link-container {
+    margin-top: 20px;
+}
+
+.link-container a {
+    color: #3B1E54;
+    font-size: 1.2em;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-a:hover {
-    text-decoration: underline;
+.link-container a:hover {
+    color: #9B7EBD;
 }
 
-/* Error message */
+/* Message d'erreur */
 .error-message {
-    color: red;
-    font-size: 14px;
+    color: #3B1E54;
+    font-size: 1.2em;
     margin-top: 10px;
-}
-
-/* Success message */
-.success-message {
-    color: green;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-/* Page-specific styles for login/register */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-form input {
-    margin-bottom: 15px;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-    .container {
-        width: 90%;
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 20px;
-    }
 }
