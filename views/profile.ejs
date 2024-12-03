@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Jackpot Tob Slot</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div class="profile-container">
+        <h1>Mon Profil</h1>
+
+        <div class="profile-info">
+            <p><strong>Nom d'utilisateur :</strong>
+                <%= username %>
+            </p>
+            <p><strong>Solde :</strong>
+                <%= balance %> €
+            </p>
+        </div>
+
+        <div class="profile-actions">
+            <button onclick="window.location.href='/game'">Retour au jeu</button>
+            <button onclick="window.location.href='/logout'">Déconnexion</button>
+        </div>
+    </div>
+</body>
+
+</html>

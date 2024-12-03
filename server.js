@@ -24,13 +24,18 @@ app.use(session({
 // Middleware pour servir des fichiers statiques (CSS, JS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Route d'accueil
+// Configuration de EJS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// Route d'accueil (page de connexion)
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.render('login');
 });
+
 // Route pour la page d'inscription
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'register.html'));
+    res.render('register');
 });
 
 // Route pour traiter les données d'inscription
@@ -61,7 +66,7 @@ app.post('/register', (req, res) => {
 
 // Route pour la page de connexion
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.render('login');
 });
 
 // Route pour traiter les données de connexion
@@ -87,74 +92,52 @@ app.post('/login', (req, res) => {
     });
 });
 
-// Route pour la page de jeu
 app.get('/game', (req, res) => {
     if (!req.session.user) {
-        return res.redirect('/login');  // Si l'utilisateur n'est pas connecté, le rediriger vers la page de connexion
-    }
-    res.sendFile(path.join(__dirname, 'public', 'game.html'));
-});
-
-// Route pour récupérer le solde de l'utilisateur connecté
-app.get('/api/user/balance', (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Utilisateur non connecté');
-    }
-    const userId = req.session.user.id;
-    db.get('SELECT balance FROM users WHERE id = ?', [userId], (err, row) => {
-        if (err) return res.status(500).send('Erreur serveur');
-        res.json({ balance: row.balance });
-    });
-});
-
-// Route pour mettre à jour le solde de l'utilisateur après un pari
-app.post('/api/user/updateBalance', (req, res) => {
-    if (!req.session.user) {
-        return res.status(401).send('Utilisateur non connecté');
-    }
-    const userId = req.session.user.id;
-    const { newBalance } = req.body;
-
-    db.run('UPDATE users SET balance = ? WHERE id = ?', [newBalance, userId], function (err) {
-        if (err) return res.status(500).send('Erreur lors de la mise à jour du solde');
-        req.session.user.balance = newBalance; // Mettre à jour le solde en session
-        res.json({ balance: newBalance });
-    });
-});
-
-// Route pour enregistrer le score (résultats du jeu) dans la base de données
-app.post('/api/scores', (req, res) => {
-    const { result, win } = req.body;
-    if (!req.session.user) {
-        return res.status(401).send('Utilisateur non connecté');
-    }
-
-    const userId = req.session.user.id;
-    db.run('INSERT INTO scores (user_id, result, win) VALUES (?, ?, ?)', [userId, result, win ? 1 : 0], function (err) {
-        if (err) return res.status(500).send('Erreur lors de l\'enregistrement du score');
-        res.status(200).send('Score enregistré');
-    });
-});
-
-// Route pour afficher la page de profil de l'utilisateur
-app.get('/profile', (req, res) => {
-    if (!req.session.user) {
-        // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
         return res.redirect('/login');
     }
 
-    // Envoyer le fichier HTML de profil
-    res.sendFile(path.join(__dirname, 'public', 'profile.html'));
+    const userId = req.session.user.id;
+
+    db.get('SELECT balance FROM users WHERE id = ?', [userId], (err, row) => {
+        if (err || !row) {
+            return res.status(500).send('Erreur lors du chargement de la page de jeu');
+        }
+
+        // Charger le solde depuis la base de données
+        res.render('game', { userBalance: row.balance });
+    });
+});
+
+app.get('/profile', (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/login');
+    }
+
+    const userId = req.session.user.id;
+
+    // Récupérer les informations à jour depuis la base de données
+    db.get('SELECT username, balance FROM users WHERE id = ?', [userId], (err, row) => {
+        if (err || !row) {
+            return res.status(500).send('Erreur lors de la récupération des données du profil');
+        }
+
+        // Rendre la vue avec les données à jour
+        res.render('profile', {
+            username: row.username,
+            balance: row.balance
+        });
+    });
 });
 
 // Route pour déconnecter l'utilisateur
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
-        res.redirect('/');
+        res.redirect('/'); // Redirige vers la page d'accueil après la déconnexion
     });
 });
 
-// Route pour récupérer le solde actuel de l'utilisateur
+// Route pour récupérer le solde actuel de l'utilisateur (API)
 app.get('/api/user/balance', (req, res) => {
     if (!req.session.user) {
         return res.status(401).json({ error: 'Utilisateur non connecté' });
@@ -183,6 +166,20 @@ app.post('/api/user/update-balance', (req, res) => {
             return res.status(500).json({ error: 'Erreur lors de la mise à jour du solde' });
         }
         res.json({ balance: newBalance });
+    });
+});
+
+// Route pour enregistrer le score (résultats du jeu) dans la base de données
+app.post('/api/scores', (req, res) => {
+    const { result, win } = req.body;
+    if (!req.session.user) {
+        return res.status(401).send('Utilisateur non connecté');
+    }
+
+    const userId = req.session.user.id;
+    db.run('INSERT INTO scores (user_id, result, win) VALUES (?, ?, ?)', [userId, result, win ? 1 : 0], function (err) {
+        if (err) return res.status(500).send('Erreur lors de l\'enregistrement du score');
+        res.status(200).send('Score enregistré');
     });
 });
 

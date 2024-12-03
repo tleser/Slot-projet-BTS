@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jackpot Tob Slot</title>
     <link rel="stylesheet" href="css/style2.css">
-    <script defer src="script.js"></script>
+    <script defer src="/script.js"></script>
 </head>
 
 <body>
@@ -14,9 +14,9 @@
         <div class="multipliers">
             <h2>Multiplications des gains</h2>
             <ul id="multipliersList">
-                <li>3 de la même ligne : x20</li>
-                <li>2 de la même ligne : x10</li>
-                <li>1 de la même ligne : x2</li>
+                <li>Si 7️⃣7️⃣7️⃣ JACKPOT ! x10</li>
+                <li>Si 🍒🍒🍒 BIG WIN ! x5</li>
+                <li>Si 🍒🍒🍉 SMALL WIN ! x2</li>
             </ul>
         </div>
 
@@ -28,15 +28,9 @@
             </div>
 
             <div class="slots">
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
-                <div class="slot"></div>
+                <% for (let i=0; i < 9; i++) { %>
+                    <div class="slot"></div>
+                    <% } %>
             </div>
 
             <button id="spin">SPIN</button>
@@ -44,17 +38,18 @@
             <div class="result-area">
                 <div id="result"></div>
                 <div class="balance-area">
-                    <div id="balance">Solde: 1000</div>
+                    <div id="balance">Solde: <%= userBalance %>
+                    </div>
                     <div class="bet-buttons">
-                        <button class="bet-button" data-amount="1">1</button>
-                        <button class="bet-button" data-amount="2">2</button>
-                        <button class="bet-button" data-amount="5">5</button>
-                        <button class="bet-button" data-amount="10">10</button>
+                        <% [1, 2, 5, 10].forEach(amount=> { %>
+                            <button class="bet-button" data-amount="<%= amount %>">
+                                <%= amount %>
+                            </button>
+                            <% }); %>
                     </div>
                 </div>
             </div>
 
-            <!-- Ajouter un bouton pour accéder au profil -->
             <div class="profile-button">
                 <button onclick="window.location.href='/profile'">Mon Profil</button>
             </div>

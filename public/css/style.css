@@ -1,9 +1,8 @@
-/* auth-style.css */
-
 /* Corps de la page */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #3B1E54, #9B7EBD);
+    background: linear-gradient(135deg, #68D2E8, #FDDE55);
+    /* Dégradé similaire à game-style */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,8 +12,8 @@ body {
 
 /* Conteneur du formulaire */
 .auth-container {
-    background: #EEEEEE;
-    /* Fond gris clair */
+    background: rgba(254, 250, 221, 0.9);
+    /* Fond beige clair similaire à la page de jeu */
     padding: 50px;
     border-radius: 20px;
     text-align: center;
@@ -27,10 +26,12 @@ body {
 h1 {
     font-size: 3.5em;
     font-weight: bold;
-    color: #3B1E54;
+    color: #03AED2;
+    /* Bleu turquoise comme dans game-style */
     margin-bottom: 30px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #3B1E54, #9B7EBD);
+    background: linear-gradient(135deg, #03AED2, #68D2E8);
+    /* Dégradé pour le titre */
     -webkit-background-clip: text;
     color: transparent;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
@@ -43,7 +44,8 @@ input[type="password"] {
     font-size: 1.2em;
     width: 80%;
     margin: 15px 0;
-    border: 2px solid #3B1E54;
+    border: 2px solid #68D2E8;
+    /* Bordure bleue claire */
     border-radius: 10px;
     outline: none;
     background-color: #FFF;
@@ -54,14 +56,16 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #9B7EBD;
+    border-color: #03AED2;
+    /* Bordure bleu turquoise au focus */
 }
 
 /* Bouton */
 button {
     padding: 15px 30px;
     margin-top: 20px;
-    background: linear-gradient(135deg, #9B7EBD, #3B1E54);
+    background: linear-gradient(135deg, #FDDE55, #03AED2);
+    /* Dégradé bleu et jaune */
     color: #FFF;
     border: none;
     border-radius: 8px;
@@ -71,7 +75,8 @@ button {
 }
 
 button:hover {
-    background: linear-gradient(135deg, #3B1E54, #D4BEE4);
+    background: linear-gradient(135deg, #03AED2, #68D2E8);
+    /* Changement au hover */
     transform: translateY(-3px);
 }
 
@@ -81,19 +86,22 @@ button:hover {
 }
 
 .link-container a {
-    color: #3B1E54;
+    color: #03AED2;
+    /* Lien bleu turquoise */
     font-size: 1.2em;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .link-container a:hover {
-    color: #9B7EBD;
+    color: #68D2E8;
+    /* Lien en bleu clair au hover */
 }
 
 /* Message d'erreur */
 .error-message {
-    color: #3B1E54;
+    color: #FDDE55;
+    /* Couleur jaune pour les erreurs */
     font-size: 1.2em;
     margin-top: 10px;
 }
