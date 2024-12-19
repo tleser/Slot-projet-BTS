@@ -89,6 +89,11 @@ h1 {
     font-size: 3rem;
     margin-bottom: 20px;
     color: #FF9F45;
+    /* Couleur du texte brillante (jaune vif) */
+    text-shadow: 0 0 15px #FF9F45, 0 0 30px #FF9F45, 0 0 45px #FF9F45;
+    /* Ombre lumineuse */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    /* Transition fluide au cas où tu veux ajouter des changements supplémentaires */
 }
 
 /* Zone des paris */
