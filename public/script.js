@@ -2,13 +2,12 @@
 const emojis = ['🍒', '🍇', '🍉', '🍋', '🍊', '7️⃣', '🔔', '🍓', '❤️'];
 const slots = document.querySelectorAll('.slot');
 const spinButton = document.getElementById('spin');
-const resultDisplay = document.getElementById('result');
+const resultMessage = document.getElementById('resultMessage'); // Nouveau conteneur pour les messages
 const balanceDisplay = document.getElementById('balance');
 const betAmountInput = document.getElementById('betAmount');
 const betButtons = document.querySelectorAll('.bet-button'); // Boutons de mise fixe
 
 let userBalance = 100; // Solde initial
-
 let isSpinning = false; // Indicateur si les rouleaux tournent (pour éviter les clics multiples)
 
 const SPIN_DELAY = 2000; // Temps d'attente avant de réactiver les boutons (en millisecondes)
@@ -16,6 +15,14 @@ const SPIN_DELAY = 2000; // Temps d'attente avant de réactiver les boutons (en 
 // Fonction pour afficher le solde actuel
 function updateBalanceDisplay() {
     balanceDisplay.textContent = `Solde: ${userBalance}`;
+}
+
+// Fonction pour mettre à jour le message de résultat
+function updateResultMessage(message, isWin = false) {
+    resultMessage.innerHTML = `
+        <p style="color: ${isWin ? '#28a745' : '#dc3545'}; font-weight: bold;">
+            ${message}
+        </p>`;
 }
 
 // Fonction pour vérifier les combinaisons gagnantes
@@ -64,9 +71,9 @@ function spinSlots(betAmount) {
         if (winMultiplier > 0) {
             const winnings = betAmount * winMultiplier;
             userBalance += winnings;
-            resultDisplay.textContent = `Bravo ! Vous avez gagné ${winnings} !`;
+            updateResultMessage(`GG ! Vous avez gagné ${winnings} !`, true);
         } else {
-            resultDisplay.textContent = `Désolé ! Vous avez perdu.`;
+            updateResultMessage(`Désolé ! Vous avez perdu.`);
         }
 
         // Mise à jour du solde côté serveur

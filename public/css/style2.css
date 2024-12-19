@@ -1,154 +1,211 @@
-/* game-style.css */
-
 /* Corps de la page */
 body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #03AED2, #68D2E8);
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #1F1D36, #3F3351);
     margin: 0;
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    color: #EAEAEA;
 }
 
 /* Conteneur principal */
 .main-container {
-    background: rgba(254, 250, 221, 0.9);
-    /* Fond beige clair avec transparence */
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 1200px;
-    max-width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 50px;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
 }
 
-/* Section centrale du jeu */
-.container {
-    background: linear-gradient(135deg, #68D2E8, #FEFAD);
-    /* Dégradé bleu clair à beige clair */
+/* Multiplicateurs */
+.multipliers {
+    background: #29263A;
+    padding: 15px 20px;
+    width: 300px;
     border-radius: 15px;
-    padding: 30px;
-    width: 60%;
-    text-align: center;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
 }
 
-/* Titre du jeu */
-h1 {
-    font-size: 3.5em;
-    color: #03AED2;
-    /* Bleu turquoise */
-    margin-bottom: 30px;
+.multipliers h2 {
+    color: #FF9F45;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
     text-transform: uppercase;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.multipliers ul {
+    list-style: none;
+    padding: 0;
+    color: #D3D3D3;
+}
+
+.multipliers li {
+    margin: 10px 0;
+}
+
+/* Conteneur du message de résultat */
+.result-message {
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: #29263A;
+    border: 2px solid #FF9F45;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 1rem;
+    text-align: center;
+    color: #EAEAEA;
+    text-transform: uppercase;
+}
+
+/* Copyright */
+.copyright {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #AAA;
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* Conteneur du jeu */
+.container {
+    background: #1F1D36;
+    border-radius: 20px;
+    padding: 30px;
+    width: 800px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #FF9F45;
+    /* Couleur du texte brillante (jaune vif) */
+    text-shadow: 0 0 15px #FF9F45, 0 0 30px #FF9F45, 0 0 45px #FF9F45;
+    /* Ombre lumineuse */
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    /* Transition fluide au cas où tu veux ajouter des changements supplémentaires */
 }
 
 /* Zone des paris */
 .bet-area {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
 }
 
-/* Input de pari */
 input[type="number"] {
-    width: 120px;
-    padding: 10px;
-    font-size: 1.3em;
-    border: 2px solid #68D2E8;
-    border-radius: 10px;
-    background-color: #FFF;
-    color: #333;
+    width: 100px;
+    font-size: 1rem;
+    padding: 5px;
+    margin-left: 10px;
     text-align: center;
+    border: 2px solid #FF9F45;
+    border-radius: 5px;
     outline: none;
-    transition: border-color 0.3s ease;
+    background: #3F3351;
+    color: #FFF;
 }
 
 input[type="number"]:focus {
-    border-color: #03AED2;
+    border-color: #FF5370;
 }
 
-/* Slot machines */
+/* Machines à sous */
 .slots {
     display: grid;
     grid-template-columns: repeat(3, 100px);
-    gap: 20px;
-    margin-top: 30px;
+    gap: 15px;
+    justify-items: center;
+    align-items: center;
+    margin: 20px 0;
+    margin-left: 225px;
 }
 
 .slot {
     width: 100px;
     height: 100px;
-    background-color: #68D2E8;
-    border: 2px solid #03AED2;
-    border-radius: 10px;
-    font-size: 2em;
+    background: linear-gradient(135deg, #FF5370, #FF9F45);
+    border-radius: 15px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     color: #FFF;
-    transition: transform 0.2s ease, background-color 0.3s ease;
+    font-size: 1.6rem;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.3s;
 }
 
 .slot:hover {
     transform: scale(1.1);
-    background-color: #FDDE55;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Multiplicateurs */
-.multipliers {
-    background: rgba(253, 222, 85, 0.9);
-    /* Fond semi-transparent jaune doux */
-    padding: 20px;
-    border-radius: 10px;
-    text-align: left;
-    width: 250px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.multipliers h2 {
-    color: #03AED2;
-    /* Bleu turquoise */
-    margin-bottom: 10px;
-}
-
-/* Bouton */
+/* Boutons */
 button {
-    padding: 15px 35px;
-    margin-top: 20px;
-    background: linear-gradient(135deg, #FDDE55, #03AED2);
-    color: #FFF;
+    padding: 10px 25px;
+    font-size: 1rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #FF5370, #FF9F45);
+    color: #FFF;
     cursor: pointer;
-    font-size: 1.3em;
     transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
-    background: linear-gradient(135deg, #03AED2, #68D2E8);
-    transform: translateY(-3px);
+    background: linear-gradient(135deg, #FF9F45, #FF5370);
+    transform: translateY(-2px);
 }
 
-/* Affichage du solde */
-#balance {
-    font-size: 1.8em;
-    font-weight: bold;
-    color: #03AED2;
-    background: rgba(253, 222, 85, 0.9);
-    padding: 10px;
-    width: 250px;
-    margin-top: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 /* Résultats */
-#result {
+.result-area {
     margin-top: 20px;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #03AED2;
+}
+
+#result {
+    font-size: 1.5rem;
+    color: #FF9F45;
+    font-weight: 600;
+}
+
+#balance {
+    background: #3F3351;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    margin: 5px auto;
+    color: #EAEAEA;
+    text-align: center;
+    width: 150px;
+}
+
+.profile-button {
+    margin-top: 10px;
+    /* Ajoute un espace vertical */
+    text-align: center;
+
+}
+
+.bet-buttons {
+    margin-top: 20px;
+    /* Ajoute un espace entre le solde et les boutons */
+    display: flex;
+    gap: 10px;
+    justify-content: center;
 }

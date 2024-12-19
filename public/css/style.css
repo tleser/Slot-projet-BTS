@@ -1,8 +1,8 @@
 /* Corps de la page */
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #68D2E8, #FDDE55);
-    /* Dégradé similaire à game-style */
+    background: linear-gradient(135deg, #1F1D36, #3F3351);
+    color: #EAEAEA;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,12 +12,12 @@ body {
 
 /* Conteneur du formulaire */
 .auth-container {
-    background: rgba(254, 250, 221, 0.9);
-    /* Fond beige clair similaire à la page de jeu */
+    background: rgba(255, 255, 255, 0.1);
+    /* Contenu avec légère transparence */
     padding: 50px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     width: 400px;
     max-width: 100%;
 }
@@ -26,15 +26,10 @@ body {
 h1 {
     font-size: 3.5em;
     font-weight: bold;
-    color: #03AED2;
-    /* Bleu turquoise comme dans game-style */
+    color: #FF9F45;
     margin-bottom: 30px;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #03AED2, #68D2E8);
-    /* Dégradé pour le titre */
-    -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Formulaire d'authentification */
@@ -44,40 +39,42 @@ input[type="password"] {
     font-size: 1.2em;
     width: 80%;
     margin: 15px 0;
-    border: 2px solid #68D2E8;
-    /* Bordure bleue claire */
+    border: 2px solid #FF5370;
     border-radius: 10px;
     outline: none;
-    background-color: #FFF;
-    color: #333;
+    background-color: #29263A;
+    color: #FFF;
     text-align: center;
     transition: border-color 0.3s ease;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #03AED2;
-    /* Bordure bleu turquoise au focus */
+    border-color: #FF9F45;
 }
 
 /* Bouton */
 button {
     padding: 15px 30px;
     margin-top: 20px;
-    background: linear-gradient(135deg, #FDDE55, #03AED2);
-    /* Dégradé bleu et jaune */
+    background: linear-gradient(135deg, #FF5370, #FF9F45);
     color: #FFF;
     border: none;
     border-radius: 8px;
     font-size: 1.3em;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 button:hover {
-    background: linear-gradient(135deg, #03AED2, #68D2E8);
-    /* Changement au hover */
+    background: linear-gradient(135deg, #FF9F45, #FF5370);
     transform: translateY(-3px);
+}
+
+button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 /* Lien d'inscription */
@@ -86,22 +83,21 @@ button:hover {
 }
 
 .link-container a {
-    color: #03AED2;
-    /* Lien bleu turquoise */
+    color: #FF9F45;
     font-size: 1.2em;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .link-container a:hover {
-    color: #68D2E8;
-    /* Lien en bleu clair au hover */
+    color: #FF5370;
 }
 
 /* Message d'erreur */
 .error-message {
     color: #FDDE55;
-    /* Couleur jaune pour les erreurs */
     font-size: 1.2em;
     margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
 }
