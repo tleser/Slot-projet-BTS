@@ -32,6 +32,14 @@ h1 {
 
 }
 
+h2 {
+    font-weight: bold;
+    color: #FF9F45;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+
+}
+
 /* Formulaire d'authentification */
 input[type="text"],
 input[type="password"] {
