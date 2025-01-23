@@ -9,10 +9,9 @@ body {
     margin: 0;
 }
 
-/* Conteneur du formulaire */
+
 .auth-container {
     background: rgba(255, 255, 255, 0.1);
-    /* Contenu avec légère transparence */
     padding: 50px;
     border-radius: 20px;
     text-align: center;
@@ -21,7 +20,7 @@ body {
     max-width: 100%;
 }
 
-/* Titre */
+
 h1 {
     font-size: 3.5em;
     font-weight: bold;
@@ -60,7 +59,7 @@ input[type="password"]:focus {
     border-color: #FF9F45;
 }
 
-/* Bouton */
+
 button {
     padding: 15px 30px;
     margin-top: 20px;
@@ -84,7 +83,7 @@ button:active {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* Lien d'inscription */
+
 .link-container {
     margin-top: 20px;
 }
@@ -100,11 +99,15 @@ button:active {
     color: #FF5370;
 }
 
-/* Message d'erreur */
+
 .error-message {
     color: #FDDE55;
     font-size: 1.2em;
     margin-top: 10px;
     text-align: center;
     font-weight: bold;
+}
+
+p {
+    color: #FF9F45;
 }

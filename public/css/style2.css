@@ -11,7 +11,7 @@ body {
     color: #EAEAEA;
 }
 
-/* Conteneur principal */
+
 .main-container {
     display: flex;
     justify-content: space-between;
@@ -22,7 +22,7 @@ body {
     padding: 20px;
 }
 
-/* Multiplicateurs */
+
 .multipliers {
     background: #29263A;
     padding: 15px 20px;
@@ -51,7 +51,7 @@ body {
     margin: 10px 0;
 }
 
-/* Conteneur du message de résultat */
+
 .result-message {
     margin-top: 20px;
     padding: 15px 20px;
@@ -65,7 +65,7 @@ body {
     text-transform: uppercase;
 }
 
-/* Copyright */
+
 .copyright {
     margin-top: 20px;
     font-size: 0.9rem;
@@ -74,7 +74,7 @@ body {
     opacity: 0.8;
 }
 
-/* Conteneur du jeu */
+
 .container {
     background: #1F1D36;
     border-radius: 20px;
@@ -90,7 +90,7 @@ h1 {
     color: #FF9F45;
 }
 
-/* Zone des paris */
+
 .bet-area {
     margin-bottom: 20px;
     font-size: 1.2rem;
@@ -113,7 +113,7 @@ input[type="number"]:focus {
     border-color: #FF5370;
 }
 
-/* Machines à sous */
+
 .slots {
     display: grid;
     grid-template-columns: repeat(3, 100px);
@@ -144,7 +144,7 @@ input[type="number"]:focus {
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* Boutons */
+
 button {
     padding: 10px 25px;
     font-size: 1rem;
@@ -167,7 +167,7 @@ button:active {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-/* Résultats */
+
 .result-area {
     margin-top: 20px;
 }
@@ -191,14 +191,12 @@ button:active {
 
 .profile-button {
     margin-top: 10px;
-    /* Ajoute un espace vertical */
     text-align: center;
 
 }
 
 .bet-buttons {
     margin-top: 20px;
-    /* Ajoute un espace entre le solde et les boutons */
     display: flex;
     gap: 10px;
     justify-content: center;
