@@ -25,13 +25,33 @@ function updateResultMessage(message, isWin = false) {
         </p>`;
 }
 
-// Fonction pour vérifier les combinaisons gagnantes
-function checkWin(results) {
-    const [symbol1, symbol2, symbol3] = results;
-    if (symbol1 === '7️⃣' && symbol2 === '7️⃣' && symbol3 === '7️⃣') return 10; // Jackpot
-    if (symbol1 === symbol2 && symbol2 === symbol3) return 5; // Big Win
-    if (symbol1 === symbol2 || symbol2 === symbol3 || symbol1 === symbol3) return 2; // Small Win
-    return 0; // Perte
+// Fonction pour vérifier les combinaisons gagnantes sur 3 lignes
+function checkWin(grid) {
+    console.log("🕵️ Vérification des résultats:", grid); // Debugging
+
+    let totalMultiplier = 0;
+
+    // Vérifier chaque ligne
+    for (let i = 0; i < 3; i++) {
+        const [symbol1, symbol2, symbol3] = grid[i];
+
+        if (symbol1 === symbol2 && symbol2 === symbol3) {
+            if (symbol1 === '7️⃣') {
+                console.log(`🎉 JACKPOT détecté sur la ligne ${i + 1} ! x10`);
+                totalMultiplier += 10; // Jackpot (3x 7️⃣)
+            } else {
+                console.log(`🎉 Big Win détecté sur la ligne ${i + 1} ! x5`);
+                totalMultiplier += 5; // Big Win (3 symboles identiques)
+            }
+        }
+        else if ((symbol1 === symbol2) || (symbol2 === symbol3)) {
+            console.log(`✅ Petite victoire détectée sur la ligne ${i + 1} ! x2`);
+            totalMultiplier += 2; // Small Win (2 symboles identiques côte à côte)
+        }
+    }
+
+    console.log("💰 Multiplicateur final:", totalMultiplier);
+    return totalMultiplier;
 }
 
 // Fonction principale pour faire tourner les rouleaux
@@ -45,12 +65,12 @@ function spinSlots(betAmount) {
     userBalance -= betAmount;
     updateBalanceDisplay();
 
-    const results = [];
+    const results = [[], [], []]; // 3 lignes x 3 colonnes
     spinButton.disabled = true;
 
     // Animation des rouleaux
     let animationInterval = setInterval(() => {
-        slots.forEach(slot => {
+        slots.forEach((slot, index) => {
             const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
             slot.innerHTML = `<span class="emoji">${randomEmoji}</span>`;
         });
@@ -59,21 +79,23 @@ function spinSlots(betAmount) {
     setTimeout(() => {
         clearInterval(animationInterval);
 
-        // Résultats finaux
-        slots.forEach(slot => {
+        // Génération des résultats finaux (3x3 grid)
+        slots.forEach((slot, index) => {
+            const row = Math.floor(index / 3); // Trouver la ligne (0, 1 ou 2)
+            const col = index % 3; // Trouver la colonne (0, 1 ou 2)
             const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-            results.push(randomEmoji);
+            results[row][col] = randomEmoji; // Stocke correctement dans la grille
             slot.innerHTML = `<span class="emoji">${randomEmoji}</span>`;
         });
 
-        // Calcul des gains
+        // Vérification des gains sur toutes les lignes
         const winMultiplier = checkWin(results);
         if (winMultiplier > 0) {
             const winnings = betAmount * winMultiplier;
             userBalance += winnings;
-            updateResultMessage(`GG ! Vous avez gagné ${winnings} !`, true);
+            updateResultMessage(`🎉 GG ! Vous avez gagné ${winnings} !`, true);
         } else {
-            updateResultMessage(`Désolé ! Vous avez perdu.`);
+            updateResultMessage(`❌ Désolé ! Vous avez perdu.`);
         }
 
         // Mise à jour du solde côté serveur
