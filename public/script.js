@@ -25,11 +25,10 @@ function updateResultMessage(message, isWin = false) {
         </p>`;
 }
 
-// Fonction pour vérifier les combinaisons gagnantes sur 3 lignes
+// Fonction pour vérifier les combinaisons gagnantes et animer les symboles gagnants
 function checkWin(grid) {
-    console.log("🕵️ Vérification des résultats:", grid); // Debugging
-
     let totalMultiplier = 0;
+    let winningSymbols = []; // Stocke les symboles gagnants pour l'animation
 
     // Vérifier chaque ligne
     for (let i = 0; i < 3; i++) {
@@ -37,21 +36,38 @@ function checkWin(grid) {
 
         if (symbol1 === symbol2 && symbol2 === symbol3) {
             if (symbol1 === '7️⃣') {
-                console.log(`🎉 JACKPOT détecté sur la ligne ${i + 1} ! x10`);
                 totalMultiplier += 10; // Jackpot (3x 7️⃣)
             } else {
-                console.log(`🎉 Big Win détecté sur la ligne ${i + 1} ! x5`);
                 totalMultiplier += 5; // Big Win (3 symboles identiques)
             }
+            winningSymbols.push([i, 0], [i, 1], [i, 2]); // Ajoute toute la ligne
         }
-        else if ((symbol1 === symbol2) || (symbol2 === symbol3)) {
-            console.log(`✅ Petite victoire détectée sur la ligne ${i + 1} ! x2`);
-            totalMultiplier += 2; // Small Win (2 symboles identiques côte à côte)
+        else if ((symbol1 === symbol2)) {
+            totalMultiplier += 2;
+            winningSymbols.push([i, 0], [i, 1]); // Ajoute les deux symboles gagnants
+        }
+        else if ((symbol2 === symbol3)) {
+            totalMultiplier += 2;
+            winningSymbols.push([i, 1], [i, 2]); // Ajoute les deux symboles gagnants
         }
     }
 
-    console.log("💰 Multiplicateur final:", totalMultiplier);
+    // Appliquer l'animation sur les symboles gagnants
+    animateWinningSymbols(winningSymbols);
+
     return totalMultiplier;
+}
+
+// Fonction pour animer les symboles gagnants
+function animateWinningSymbols(winningSymbols) {
+    slots.forEach(slot => slot.classList.remove("win-animation")); // Supprime l'animation précédente
+
+    setTimeout(() => {
+        winningSymbols.forEach(([row, col]) => {
+            const index = row * 3 + col; // Convertir les coordonnées en index 1D
+            slots[index].classList.add("win-animation");
+        });
+    }, 100); // Légère pause avant d'ajouter l'effet
 }
 
 // Fonction principale pour faire tourner les rouleaux
@@ -70,7 +86,7 @@ function spinSlots(betAmount) {
 
     // Animation des rouleaux
     let animationInterval = setInterval(() => {
-        slots.forEach((slot, index) => {
+        slots.forEach((slot) => {
             const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
             slot.innerHTML = `<span class="emoji">${randomEmoji}</span>`;
         });
@@ -81,10 +97,10 @@ function spinSlots(betAmount) {
 
         // Génération des résultats finaux (3x3 grid)
         slots.forEach((slot, index) => {
-            const row = Math.floor(index / 3); // Trouver la ligne (0, 1 ou 2)
-            const col = index % 3; // Trouver la colonne (0, 1 ou 2)
+            const row = Math.floor(index / 3);
+            const col = index % 3;
             const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-            results[row][col] = randomEmoji; // Stocke correctement dans la grille
+            results[row][col] = randomEmoji;
             slot.innerHTML = `<span class="emoji">${randomEmoji}</span>`;
         });
 
