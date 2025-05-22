@@ -28,7 +28,4 @@ Clone the repository to your local machine and follow the instructions to set up
 
 After running the project locally, open your web browser and navigate to `http://localhost:3000` to start playing the Jackpot Tob Slot game.
 
-## License
-
-This project is licensed under the MIT License.
 
